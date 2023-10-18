@@ -102,5 +102,73 @@ An integer n is a power of three, if there exists an integer x such that n == 3x
         return 1;
     }
 
+    /*
+    Excel Column Number
+    Given a column title A as appears in an Excel sheet, return its corresponding column number.
+    For example:
+    A -> 1
+    B -> 2
+    C -> 3
+    ...
+    Z -> 26
+    AA -> 27
+    AB -> 28
+    ...
+     */
+    public long titleToNumber(String s) {
+        //You can code here
+        long colNum = 0, postionValue = 1;
+        int n = s.length();
+        for (int i = n - 1; i >= 0; i--) {
+            int charValue = (int) (s.charAt(i) - 'A') + 1;
+            colNum += postionValue * charValue;
+            postionValue *= 26;
+        }
+        return colNum;
+    }
+    /*
+    Add Binary String
+    Given two binary strings a and b of length m and n respectively,
+    return their sum as a binary string. A binary string is a string which consists of
+    only ‘0’ and ‘1’ as characters. Each string does not contain leading zeros except for the zero itself.
+     */
+    public String addBinary(String a, String b) {
+        //You can code here
+        StringBuilder sb = new StringBuilder();
+        int i= a.length()-1, j = b.length()-1, carry = 0;
+        while(i >=0 || j>= 0 || carry != 0){
+            int sum =0;
+            sum += (i>= 0) ? (int)(a.charAt(i--) -'0'):0;
+            sum += j >= 0 ? (int)(b.charAt(j--) -'0') :0;
+            sum += carry;
+            carry = sum/2;
+            char anspart = (char)(sum%2 + '0');
+            sb.append(anspart);
+        }
+        sb.reverse();
+        return sb.toString();
+    }
+    /*
+    Find Location
+    Implement a function that takes two strings as input (s and x) and returns the first 0-based
+    index of x within s. Return -1 if x is not found.
+    You are not allowed to use any in-built functions to solve this problem.
+     */
+    public static int findLocation(String s, String x){
+        int n = s.length(), m = x.length();
+
+        for(int i=0; i<n; i++){
+            int j=0;
+            for(; j<m; j++){
+                if(s.charAt(i+j) != x.charAt(j)){
+                    break;
+                }
+            }
+            if(j == m){
+                return i;
+            }
+        }
+        return -1;
+    }
 }
 
