@@ -41,4 +41,26 @@ public class Problems {
         }
         return ans;
     }
+    /*Balanced Parantheses                   date: 26-10-23
+    Given a string A consisting only of '(' and ')'.
+    You need to find whether parentheses in A are balanced or not, if it is balanced
+     then return 1 else return 0.
+     */
+    public int isBalanced(String A) {
+        //You can code here
+        int openBracketCnt = 0;
+
+        for(char ch : A.toCharArray()){
+            if( ch == '('){
+                openBracketCnt++;
+            }
+            else{
+                if(openBracketCnt == 0){
+                    return 0;
+                }
+                openBracketCnt--;
+            }
+        }
+        return (openBracketCnt == 0) ? 1 : 0;
+    }
 }
