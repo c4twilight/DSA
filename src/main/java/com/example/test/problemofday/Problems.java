@@ -63,4 +63,17 @@ public class Problems {
         }
         return (openBracketCnt == 0) ? 1 : 0;
     }
+    /*
+    Trailing Zeroes in Factorial            date: 27-10-23
+    Given an integer n, return the number of trailing zeroes in n!.
+     */
+    public int trailingZeroes(int n) {
+        int zero =0;
+        while(n != 0){
+            n /= 5;
+            zero += n;
+        }
+        return zero;
+    }
+
 }
