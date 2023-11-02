@@ -459,4 +459,132 @@ a revision at an index, then treat the revision as 0. For example, version 1.0 i
         }
         return 0;
     }
+    /*
+    Day of the Week for a Given Date
+    Given a date, return the corresponding day of the week for that date.
+Return '1' for Monday, '2' for Tuesday, '3' for Wednesday, '4' for Thursday,
+'5' for Friday, '6' for 'Saturday' and '7' for Sunday.
+     */
+    static int[] daysInMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    static String[] dayOfWeek = {"Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+    public static int dayofweek(int day, int month, int year){
+      /*The formula for this problem is Zelle formula
+        if (m < 3) {
+            m += 12;
+            y -= 1;
+        }
+        int c = y / 100;
+        y = y % 100;
+        int w = (c / 4 - 2 * c + y + y / 4 + 13 * (m + 1) / 5 + d - 1) % 7;
+        return (w + 7) % 7;
+        */
+        /*
+        // todays date
+        // java.time.LocalDate date = java.time.LocalDate.now();
+       // So my first step is to get day for 31st Dec 1970 which is Thrusday ( check in your calender)
+        // Initialize count as 4 because 31st Dec 1970 is Thrusday, which is 4.
+// In all we are calculating total number of day till the required Input Date. After the we can simply find particular day name.
+
+        int d = 4;
+
+        d += daysSinceStart(day, month, year);
+        //int knownDays = daysSinceStart(date.getDayOfMonth(), date.getMonthValue(), date.getYear());
+        //int daysShiftFromToday = d - knownDays + date.getDayOfWeek().getValue(); // date.getDayOfWeek().getValue() tells which day of week is today 4 means thrusday.
+
+
+        String week = dayOfWeek[(d % 7 + 7) % 7];
+        return week;
+         */
+        // todays date
+        java.time.LocalDate date = java.time.LocalDate.now();
+
+        int d = daysSinceStart(day, month, year);
+        int knownDays = daysSinceStart(date.getDayOfMonth(), date.getMonthValue(), date.getYear());
+        int daysShiftFromToday = d - knownDays + date.getDayOfWeek().getValue(); // date.getDayOfWeek().getValue() tells which day of week is today 4 means thrusday.
+        //String week = dayOfWeek[(daysShiftFromToday % 7 + 7) % 7];
+        return (daysShiftFromToday % 7 + 7) % 7;
+    }
+    private static int daysSinceStart(int d, int m, int y){
+        int days = 0;
+        for(int i = 1971; i < y; i++){
+            days += 365 + isLeap(i);
+        }
+
+        for(int i = 1; i < m; i++){
+            days += daysInMonth[i - 1];
+        }
+
+        days += d;
+        if(m > 2 && isLeap(y) == 1){
+            days += 1;
+        }
+        return days;
+    }
+
+    private static int isLeap(int year){
+        return (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) ? 1 : 0;
+    }
+
+/* String Substring
+Given a string ‘str’, check if it can be constructed by taking a substring of it
+ and appending multiple copies of the substring together.
+ */
+    public boolean repeatedSubstringPattern(String str)
+    {
+        //You can code here
+        // String s = str + str;
+        // return (s.substring(1, s.length() - 1).contains(str));
+
+        int n = str.length();
+        for (int i = n / 2; i >= 1; i--)
+        {
+            if (n % i == 0 && str.charAt(i-1) == str.charAt(n-1))
+            {
+                int m = n / i;
+                StringBuilder sb = new StringBuilder();
+                String sub = str.substring(0, i);
+                for (int j = 0; j < m; j++)
+                {
+                    sb.append(sub);
+                }
+                if (sb.toString().equals(str)) return true;
+            }
+        }
+        return false;
+    }
+
+    // by lps way KMP alogo need to learn again then do it.
+    public boolean LPSrepeatedSubstringPattern(String str) {
+
+        int n = str.length();
+        //The LPS array contains for each prefix of s the length of the longest proper prefix which is also a suffix.
+        int lps[] = new int[n];
+        computelps(lps,str);
+        int ans = lps[n-1];
+        return (ans > 0 && n % (n - ans) == 0);
+        /*
+        The line return (ans > 0 && n % (n - ans) == 0); checks if there’s a repeated substring pattern in the string. If ans > 0, it means there’s a proper prefix which is also suffix. And if n % (n - ans) == 0, it means the rest of the string can be divided evenly by this prefix/suffix, so it’s made up of repeated patterns of this substring.
+        */
+    }
+
+    private void computelps(int [] lps, String s){
+        int n = lps.length;
+        int i = 1, len = 0;
+        while(i<n){
+            if(s.charAt(i) == s.charAt(len)){
+                lps[i++] = ++len;
+            }
+            else{
+                if(len == 0){
+                    lps[i++] = len;
+                }
+                else{
+                    int previousMatchIndex = len-1;
+                    len = lps[previousMatchIndex];
+
+                }
+            }
+        }
+    }
+
 }
