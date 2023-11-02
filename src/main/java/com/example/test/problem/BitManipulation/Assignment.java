@@ -587,4 +587,21 @@ Given a string ‘str’, check if it can be constructed by taking a substring o
         }
     }
 
+    /*
+    Count number of divsior
+    You will be given a positive integer N >= 1 . You need to find out the number of divisors of
+     */
+    public int countDivisor(int n){
+        int result = 0;
+
+        for(int j=1;j*j<=n;j++){
+            if(n%j == 0){
+                result = result + 1;
+                int other = n/j; // to check both j and other are not same num
+                result +=  ((other != j)? 1 :0);
+            }
+        }
+        return result;
+    }
+
 }
