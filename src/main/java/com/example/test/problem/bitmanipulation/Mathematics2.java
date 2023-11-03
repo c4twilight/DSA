@@ -1,4 +1,4 @@
-package com.example.test.problem.BitManipulation;
+package com.example.test.problem.bitmanipulation;
 
 public class Mathematics2 {
     static int m = (int) (1e9+7);

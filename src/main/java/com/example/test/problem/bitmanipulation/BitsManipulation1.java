@@ -1,4 +1,4 @@
-package com.example.test.problem.BitManipulation;
+package com.example.test.problem.bitmanipulation;
 
 public class BitsManipulation1{
     public static void main(String[] args) {
