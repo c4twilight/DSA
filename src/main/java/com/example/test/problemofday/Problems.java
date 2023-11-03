@@ -1,9 +1,6 @@
 package com.example.test.problemofday;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class Problems {
     /*
@@ -74,6 +71,36 @@ public class Problems {
             zero += n;
         }
         return zero;
+    }
+
+    /*
+    Peak Element        date :- 03-11-23
+    A peak element is an element that is not smaller than its neighbors.
+    Given an array A, find a peak element, and return its index. If the array contains multiple peaks, return the smallest index of the peak element.
+    For corner elements, we need to consider only one neighbor.
+     */
+    public static int findPeak(List<Integer> A){
+        int n = A.size();
+        if((n == 1) || (A.get(0) > A.get(1))){
+            return 0;
+        }else if(A.get(n-1) > A.get(n-2)){
+            return n-1;
+        }
+
+        int low = 1, high = n-2;
+        while(low <= high){
+            int mid = low + (high - low)/2;
+            if(A.get(mid) > A.get(mid -1) && A.get(mid)> A.get(mid+1)){
+                return mid;
+            }
+            else if(A.get(mid) > A.get(mid -1)){
+                low = mid + 1;
+            }
+            else{
+                high  = mid -1;
+            }
+        }
+        return -1;
     }
 
 }
