@@ -102,5 +102,26 @@ public class Problems {
         }
         return -1;
     }
+    /*Nearest Smaller Element
+    Given an array arr of length n, return a vector result where result[i] is the nearest smaller element
+    for every element arr[i] in the array such that the element has an index smaller than i. In case no
+    smaller element before arr[i], put -1 in the array.*/
+    public static ArrayList<Integer> prevSmaller(ArrayList<Integer> A){
+        // nearest smaller element(from left) so start from left.
+        Stack<Integer> st = new Stack<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        for(Integer a : A){
+            while(!st.isEmpty() && st.peek() >= a){
+                st.pop();
+            }
+            if(st.isEmpty()){
+                list.add(-1);
+            }else{
+                list.add(st.peek());
+            }
+            st.push(a);
+        }
+        return list;
+    }
 
 }
