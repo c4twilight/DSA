@@ -1,4 +1,4 @@
-package com.example.test.problem;
+package com.example.test.problemofday;
 
 public class ListNode {
     int val;
