@@ -49,8 +49,11 @@
 			<artifactId>jakarta.xml.bind-api</artifactId>
 			<version>4.0.0</version>
 		</dependency>
-
-
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>30.1-jre</version> <!-- Use the latest version available -->
+		</dependency>
 	</dependencies>
 
 	<build>
