@@ -23,6 +23,7 @@ public class HeapQuestion {
         return true;
     }
 
+    //Q2. convert the given array into minHeap.
     public void convertArrayIntoMinHeap(int arr[]){
         int size = arr.length;
         // Index of last non-leaf node
@@ -36,28 +37,27 @@ public class HeapQuestion {
     }
     public void heapify(int heap[], int size,int pos) {
         while (pos < size) {
-            int largest = pos;
-            int left = 2*pos+1;
-            int right = 2*pos+2;
+            int smallest = pos;
+            int left = 2 * pos + 1;
+            int right = 2 * pos + 2;
 
-            // Find the index of the largest element among current node, left child, and right child.
-            if (left < size && heap[left] > heap[largest])
-                largest = left;
-            if (right < size && heap[right] > heap[largest])
-                largest = right;
+            // Find the index of the smallest element among current node, left child, and right child.
+            if (left < size && heap[left] < heap[smallest])
+                smallest = left;
+            if (right < size && heap[right] < heap[smallest])
+                smallest = right;
 
-            // If the largest element is not the current node, swap.
-            if (largest != pos) {
-               // swap(pos, largest);
+            // If the smallest element is not the current node, swap.
+            if (smallest != pos) {
+               // swap(pos, smallest);
                 int temp = heap[pos];
-                heap[pos] = heap[largest];
-                heap[largest] = temp;
-                pos = largest;
+                heap[pos] = heap[smallest];
+                heap[smallest] = temp;
+                pos = smallest;
             } else {
                 // If no swap is needed, break out of the loop.
                 break;
             }
         }
     }
-
 }
