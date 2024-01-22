@@ -74,6 +74,40 @@ public class inorderPredecessor {
 
         return root;
     }
+
+    //1534 · Convert Binary Search Tree to Sorted Doubly Linked List
+    public class BSTTODLLCircular {
+        /**
+         * @param root: root of a tree
+         * @return: head node of a doubly linked list
+         */
+        TreeNode prev = null, head = null;
+        //Function to convert binary tree to doubly linked list and return it.
+
+        void convertToDLL(TreeNode root){
+            if(root == null) return;
+
+            convertToDLL(root.left);
+
+            if(prev == null) head = root;
+            else{
+                root.left = prev;
+                prev.right = root;
+            }
+            prev = root;
+
+            convertToDLL(root.right);
+        }
+        public TreeNode treeToDoublyList(TreeNode root) {
+            prev = null;
+            head = null;
+
+            convertToDLL(root);
+            prev.right=head;
+            head.left=prev;
+            return head;
+        }
+    }
 }
  //Definition for a binary tree node.
 
