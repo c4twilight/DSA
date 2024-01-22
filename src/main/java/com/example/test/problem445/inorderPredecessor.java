@@ -32,6 +32,30 @@ public class inorderPredecessor {
         }
         return Successor;
     }
+
+    //BST to sorted DLL
+    static TreeNode prev = null, head = null;
+    public static TreeNode bstToSortedDLL(TreeNode root) {
+        prev = null;
+        head = null;
+
+        convertToDLL(root);
+        return head;
+    }
+    static void convertToDLL(TreeNode root){
+        if(root == null) return;
+
+        convertToDLL(root.left);
+
+        if(prev == null) head = root;
+        else{
+            root.left = prev;
+            prev.right = root;
+        }
+        prev = root;
+
+        convertToDLL(root.right);
+    }
 }
  //Definition for a binary tree node.
 
