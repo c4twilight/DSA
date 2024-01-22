@@ -56,6 +56,24 @@ public class inorderPredecessor {
 
         convertToDLL(root.right);
     }
+    //convert LL to Balanced BST with O(H) space.
+    //https://youtu.be/18w8VduomfI?si=846SYbRiBQ3S2idE
+    private static TreeNode convertToBST(TreeNode[] head, int n) {
+        if (n <= 0 || head[0] == null) {
+            return null;
+        }
+
+        TreeNode leftTree = convertToBST(head, n / 2);
+
+        TreeNode root = head[0];
+        root.left = leftTree;
+
+        head[0] = head[0].right;
+
+        root.right = convertToBST(head, n - n / 2 - 1);
+
+        return root;
+    }
 }
  //Definition for a binary tree node.
 
