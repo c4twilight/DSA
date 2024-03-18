@@ -16,5 +16,9 @@ public class BiDirectionMap {
         System.out.println("Value for key 2: " + biMap.get(2));
         System.out.println("Key for value 'One': " + biMap.inverse().get("One"));
         System.out.println("Key for value 'Two': " + biMap.inverse().get("Two"));
+        System.out.println("Key for value 'Three': " + biMap.inverse().get("Three"));
+
+
+
     }
 }

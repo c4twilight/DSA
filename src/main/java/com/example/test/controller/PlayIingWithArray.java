@@ -23,4 +23,5 @@ public class PlayIingWithArray {
                 .reduce(0, Integer::sum);
         return  sum.toString();
     }
+
 }
